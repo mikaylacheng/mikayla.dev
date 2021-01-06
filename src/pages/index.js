@@ -4,21 +4,10 @@ import { Link } from "gatsby"
 import Layout from "../components/layout"
 import Image from "../components/image"
 import SEO from "../components/seo"
-
-const adjectives = ["boba addict", "aaron", "miklahyla", "brett", "mikayla"]
+import Typist from "react-typist"
+import TypistLoop from "react-typist-loop"
 
 function IndexPage() {
-  const [idx, setIdx] = useState(0)
-
-  useEffect(() => {
-    setInterval(changeAdjective, 1000)
-  }, [])
-
-  function changeAdjective() {
-    console.log("fire")
-    setIdx((idx + 1) % adjectives.length)
-  }
-
   return (
     <Layout>
       <SEO title="Home" />
@@ -32,12 +21,16 @@ function IndexPage() {
           </p>
           <p></p>
           <br />
-          <p>
-            I'm also a{" "}
-            <span className="transform duration-500 ease-in-out text-red">
-              {adjectives[idx]}
-            </span>
-          </p>
+          <div className="flex">
+            <p className="inline mr-1">I'm also a</p>
+            <TypistLoop className="inline " interval={2000}>
+              {["boba addict", "violinist", "painfully cute"].map(text => (
+                <Typist key={text} startDelay={1000}>
+                  <span className="text-blue-500">{text}</span>
+                </Typist>
+              ))}
+            </TypistLoop>
+          </div>
         </div>
         <div>
           <p>An image</p>
